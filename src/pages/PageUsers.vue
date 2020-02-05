@@ -1,10 +1,10 @@
 <template>
   <q-page class="flex q-pa-md">
-    <q-list class="full-width" bordered>
+    <q-list class="full-width" separator>
       <q-item
         v-for="user in users"
         :key="user.id"
-        class="q-my-sm"
+        to="/chat"
         clickable
         v-ripple
       >
@@ -19,7 +19,9 @@
         </q-item-section>
 
         <q-item-section side>
-          <q-icon name="chat_bubble" color="green" />
+          <q-badge :color="user.online ? 'light-green-5' : 'grey-4'">
+            {{ user.online ? 'Online' : 'Offline' }}
+          </q-badge>
         </q-item-section>
       </q-item>
     </q-list>
@@ -34,14 +36,17 @@ export default {
         {
           id: 1,
           name: 'Ruddy Jedrzej',
+          online: true,
         },
         {
           id: 2,
           name: 'Mallorie Alessandrini',
+          online: false,
         },
         {
           id: 3,
           name: 'Elisabetta Wicklen',
+          online: true,
         },
       ],
     }

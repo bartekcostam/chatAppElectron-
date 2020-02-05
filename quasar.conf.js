@@ -54,10 +54,10 @@ module.exports = function(ctx) {
         'QItemSection',
         'QItemLabel',
       ],
-      directives: [],
+      directives: ['Ripple'],
 
       // Quasar plugins
-      plugins: [],
+      plugins: ['Notify'],
     },
 
     // https://quasar.dev/quasar-cli/cli-documentation/supporting-ie
