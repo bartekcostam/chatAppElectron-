@@ -54,4 +54,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+q-badge {
+  color: red;
+}
+</style>
