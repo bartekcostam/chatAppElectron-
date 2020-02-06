@@ -1,5 +1,8 @@
 <template>
   <q-page class="flex column">
+    <q-banner class="bg-grey-4 text-center">
+      User is offline
+    </q-banner>
     <div class="q-pa-md column col justify-end">
       <q-chat-message
         v-for="message in messages"
@@ -38,11 +41,11 @@ export default {
       newMessage: '',
       messages: [
         {
-          text: 'Hi',
+          text: 'Good morning',
           from: 'me',
         },
         {
-          text: 'Hi',
+          text: 'Hello',
           from: 'them',
         },
         {

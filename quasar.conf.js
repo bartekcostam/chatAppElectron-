@@ -58,6 +58,8 @@ module.exports = function(ctx) {
         'QFooter',
         'QInput',
         'QChatMessage',
+        'QForm',
+        'QBanner',
       ],
       directives: ['Ripple'],
 

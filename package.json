@@ -13,7 +13,8 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "quasar": "^1.0.0",
-    "styl": "^0.2.9"
+    "styl": "^0.2.9",
+    "vue-cli-plugin-quasar": "^2.0.0"
   },
   "devDependencies": {
     "@quasar/app": "^1.0.0"
