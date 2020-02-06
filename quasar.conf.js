@@ -56,6 +56,8 @@ module.exports = function(ctx) {
         'QBadge',
         'QAvatar',
         'QFooter',
+        'QInput',
+        'QChatMessage',
       ],
       directives: ['Ripple'],
 
