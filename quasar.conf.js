@@ -53,6 +53,9 @@ module.exports = function(ctx) {
         'QItem',
         'QItemSection',
         'QItemLabel',
+        'QBadge',
+        'QAvatar',
+        'QFooter',
       ],
       directives: ['Ripple'],
 

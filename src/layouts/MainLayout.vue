@@ -3,6 +3,15 @@
     <q-layout view="lHh Lpr lFf">
       <q-header elevated>
         <q-toolbar>
+          <q-btn
+            v-if="$route.fullPath.includes('/chat')"
+            v-go-back="'/'"
+            icon="arrow_back"
+            dense
+            flat
+            label="Back"
+          />
+
           <q-toolbar-title class="absolute-center">{{ title }}</q-toolbar-title>
         </q-toolbar>
       </q-header>
@@ -16,7 +25,7 @@
 
 <script>
 import { openURL } from 'quasar'
-
+import { GoBack } from 'quasar'
 export default {
   computed: {
     title() {
@@ -25,6 +34,9 @@ export default {
       else if (currentPath == '/chat') return 'Chat'
       else if (currentPath == '/auth') return 'Login'
     },
+  },
+  directives: {
+    GoBack,
   },
   methods: {
     openURL,
