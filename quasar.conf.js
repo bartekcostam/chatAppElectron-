@@ -60,6 +60,10 @@ module.exports = function(ctx) {
         'QChatMessage',
         'QForm',
         'QBanner',
+        'QTabPanels',
+        'QSeparator',
+        'QTabs',
+        'QTab',
       ],
       directives: ['Ripple'],
 
