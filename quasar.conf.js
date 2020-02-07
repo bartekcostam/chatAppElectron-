@@ -64,6 +64,10 @@ module.exports = function(ctx) {
         'QSeparator',
         'QTabs',
         'QTab',
+        'QCard',
+        'QTabPanel',
+        'QToolbar',
+        'QSpace',
       ],
       directives: ['Ripple'],
 

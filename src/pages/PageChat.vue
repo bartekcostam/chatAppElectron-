@@ -7,7 +7,7 @@
       <q-chat-message
         v-for="message in messages"
         :key="message.text"
-        name="message.from"
+        :name="message.from"
         :text="[message.text]"
         :sent="message.from == 'me' ? true : false"
       />
@@ -41,7 +41,7 @@ export default {
       newMessage: '',
       messages: [
         {
-          text: 'Good morning',
+          text: 'Good morning ....  dfghdfuihguidfh',
           from: 'me',
         },
         {
@@ -70,4 +70,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.q-message-text {
+  padding: 10px 20px;
+}
+</style>
