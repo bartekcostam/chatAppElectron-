@@ -2,9 +2,15 @@ import { firebaseAuth, firebaseDb } from 'boot/firebase'
 
 // store module needs to have 4 diffrent objects.
 //state - where all our data from the app go
-const state = {}
+const state = {
+  userDetails: {},
+}
 //
-const mutations = {}
+const mutations = {
+  setUserDetails(state, payload) {
+    state.userDetails = payload
+  },
+}
 const actions = {
   registerUser({}, payload) {
     firebaseAuth
@@ -31,6 +37,26 @@ const actions = {
       .catch(error => {
         console.log(error.message)
       })
+  },
+  handleAuthStateChanged({ commit }) {
+    firebaseAuth.onAuthStateChanged(user => {
+      if (user) {
+        // User is logged in.
+        let userId = firebaseAuth.currentUser.uid
+
+        firebaseDb.ref('users/' + userId).once('value', snapshot => {
+          let userDetails = snapshot.val()
+          commit('setUserDetails', {
+            name: userDetails.name,
+            email: userDetails.email,
+            userId: userId,
+          })
+        })
+      } else {
+        //user is logged out
+        commit('setUserDetails', {})
+      }
+    })
   },
 }
 const getters = {}
