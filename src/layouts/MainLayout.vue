@@ -5,7 +5,7 @@
         <q-toolbar>
           <q-btn
             v-if="$route.fullPath.includes('/chat')"
-            v-go-back="'/'"
+            v-go-back.single
             icon="arrow_back"
             dense
             flat
@@ -14,6 +14,7 @@
 
           <q-toolbar-title class="absolute-center">{{ title }}</q-toolbar-title>
           <q-btn
+            v-if="!userDetails.userId"
             to="/auth"
             class="absolute-right q-pa-sm"
             icon="account_circle"
@@ -22,6 +23,19 @@
             flat
             label="Login"
           />
+          <q-btn
+            v-else
+            @click="logoutUser"
+            class="absolute-right q-pa-sm"
+            icon="account_circle"
+            no-caps
+            dense
+            flat
+          >
+            Logout
+            <br />
+            {{ userDetails.name }}
+          </q-btn>
         </q-toolbar>
       </q-header>
 
@@ -33,10 +47,12 @@
 </template>
 
 <script>
-import { openURL } from 'quasar'
-import { GoBack } from 'quasar'
+import { Quasar, GoBack } from 'quasar'
+import { mapState, mapActions } from 'vuex'
+import { Vue } from 'vue'
 export default {
   computed: {
+    ...mapState('store', ['userDetails']),
     title() {
       let currentPath = this.$route.fullPath
       if (currentPath == '/') return 'Chat'
@@ -44,11 +60,15 @@ export default {
       else if (currentPath == '/auth') return 'Login'
     },
   },
-  directives: {
-    GoBack,
-  },
   methods: {
-    openURL,
+    ...mapActions('store', ['logoutUser']),
   },
 }
 </script>
+<style lang="stylus">
+.q-toolbar {
+  .q-btn {
+    line-height: 1.2;
+  }
+}
+</style>

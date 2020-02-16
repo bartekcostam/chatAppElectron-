@@ -69,7 +69,7 @@ module.exports = function(ctx) {
         'QToolbar',
         'QSpace',
       ],
-      directives: ['Ripple'],
+      directives: ['Ripple', 'GoBack'],
 
       // Quasar plugins
       plugins: ['Notify'],

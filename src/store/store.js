@@ -1,14 +1,19 @@
+import Vue from 'vue'
 import { firebaseAuth, firebaseDb } from 'boot/firebase'
 
 // store module needs to have 4 diffrent objects.
 //state - where all our data from the app go
 const state = {
   userDetails: {},
+  users: {},
 }
 //
 const mutations = {
   setUserDetails(state, payload) {
     state.userDetails = payload
+  },
+  addUser(state, payload) {
+    Vue.set(state.users, payload.userId, payload.userDetails)
   },
 }
 const actions = {
@@ -38,7 +43,10 @@ const actions = {
         console.log(error.message)
       })
   },
-  handleAuthStateChanged({ commit }) {
+  logoutUser() {
+    firebaseAuth.signOut()
+  },
+  handleAuthStateChanged({ commit, dispatch, state }) {
     firebaseAuth.onAuthStateChanged(user => {
       if (user) {
         // User is logged in.
@@ -52,14 +60,46 @@ const actions = {
             userId: userId,
           })
         })
+        dispatch('firebaseUpdateUser', {
+          userId: userId,
+          updates: {
+            online: true,
+          },
+        })
+        dispatch('firebaseGetUsers')
+        this.$router.push('/')
       } else {
         //user is logged out
+        dispatch('firebaseUpdateUser', {
+          userId: state.userDetails.userId,
+          updates: {
+            online: false,
+          },
+        })
         commit('setUserDetails', {})
+        this.$router.replace('/auth')
       }
     })
   },
+  firebaseUpdateUser({}, payload) {
+    firebaseDb.ref('users/' + payload.userId).update(payload.updates)
+  },
+  firebaseGetUsers({ commit }) {
+    firebaseDb.ref('users').on('child_added', snapshot => {
+      let userDetails = snapshot.val()
+      let userId = snapshot.key
+      commit('addUser', {
+        userId,
+        userDetails,
+      })
+    })
+  },
 }
-const getters = {}
+const getters = {
+  users: state => {
+    return state.users
+  },
+}
 
 export default {
   namespaced: true,
