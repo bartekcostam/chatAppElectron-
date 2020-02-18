@@ -131,6 +131,12 @@ const actions = {
       commit('clearMessages')
     }
   },
+  firebaseSendMessage({}, payload) {
+    console.log('payload:', payload)
+    firebaseDb
+      .ref('chats/' + state.userDetails.userId + '/' + payload.otherUserId)
+      .push(payload.message)
+  },
 }
 const getters = {
   users: state => {
