@@ -50,13 +50,15 @@
 import { Quasar, GoBack } from 'quasar'
 import { mapState, mapActions } from 'vuex'
 import { Vue } from 'vue'
+import mixinOtherUserDetails from 'src/mixins/mixin-other-user-details.js'
 export default {
+  mixins: [mixinOtherUserDetails],
   computed: {
     ...mapState('store', ['userDetails']),
     title() {
       let currentPath = this.$route.fullPath
       if (currentPath == '/') return 'Chat'
-      else if (currentPath == '/chat') return 'Chat'
+      else if (currentPath.includes('/chat')) return this.otherUserDetails.name
       else if (currentPath == '/auth') return 'Login'
     },
   },
